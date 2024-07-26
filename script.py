@@ -20,22 +20,25 @@ def process_m3u(m3u_content):
                 if channel_name not in channel_dict:
                     channel_dict[channel_name] = {'hevc': None, 'normal': None, 'fps': None}
         elif line.startswith('http') and current_channel:
-            if 'HEVC' in current_channel:
-                channel_dict[channel_name]['hevc'] = (current_channel, line)
-            elif '50 FPS' in current_channel:
-                channel_dict[channel_name]['fps'] = (current_channel, line)
-            else:
-                channel_dict[channel_name]['normal'] = (current_channel, line)
+            match = re.search(r'tvg-name="([^"]+)"', current_channel)
+            if match:
+                channel_name = match.group(1)
+                if 'HEVC' in channel_name:
+                    channel_dict[channel_name]['hevc'] = (current_channel, line)
+                elif '50 FPS' in channel_name:
+                    channel_dict[channel_name]['fps'] = (current_channel, line)
+                else:
+                    channel_dict[channel_name]['normal'] = (current_channel, line)
             current_channel = None
 
     new_m3u_content = "#EXTM3U\n"
     for channels in channel_dict.values():
         if channels['hevc']:
             new_m3u_content += f"{channels['hevc'][0]}\n{channels['hevc'][1]}\n"
-        elif channels['normal']:
-            new_m3u_content += f"{channels['normal'][0]}\n{channels['normal'][1]}\n"
         elif channels['fps']:
             new_m3u_content += f"{channels['fps'][0]}\n{channels['fps'][1]}\n"
+        elif channels['normal']:
+            new_m3u_content += f"{channels['normal'][0]}\n{channels['normal'][1]}\n"
 
     return new_m3u_content
 
