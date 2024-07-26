@@ -38,6 +38,6 @@ jobs:
       env:
         ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
       run: |
-        git add processed_playlist.m3u
-        git commit -m 'Update processed_playlist.m3u'
+        git add processed_itv_proxy.m3u
+        git commit -m 'Update processed_itv_proxy.m3u'
         git push https://${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}.git main
