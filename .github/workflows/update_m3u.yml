@@ -9,6 +9,8 @@ on:
 
 jobs:
   update-m3u:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
