@@ -26,6 +26,8 @@ jobs:
 
     - name: List files for debug
       run: ls -al
+    - name: print token
+      run: echo ${{ secrets.ACTIONS_PAT }}
 
     - name: Commit changes
       env:
