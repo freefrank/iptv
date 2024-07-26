@@ -27,11 +27,15 @@ jobs:
     - name: List files for debug
       run: ls -al
 
+    - name: Configure Git
+      run: |
+        git config --global user.name 'freefrank'
+        git config --global user.email 'freefrank21@gmail.com'
+
     - name: Commit changes
       env:
-        DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+        ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
       run: |
-        git remote set-url origin https://${{ secrets.DEPLOY_SECRET }}@github.com/${{ github.repository }}.git
         git add processed_playlist.m3u
         git commit -m 'Update processed_playlist.m3u'
-        git push origin main
+        git push https://${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}.git main
