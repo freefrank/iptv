@@ -29,11 +29,11 @@ jobs:
 
     - name: Commit changes
       env:
-        ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
+        DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
       run: |
-        git config --global user.name 'freefrank'
-        git config --global user.email 'freefrank21@gmail.com'
-        git remote set-url origin https://${{ github.actor }}:${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}.git
+        git config --global user.name ${{ secrets.MY_USER_NAME }}
+        git config --global user.email ${{ secrets.MY_USER_EMAIL }}
+        git remote set-url origin https://${{ secrets.DEPLOY_SECRET }}@github.com/${{ github.repository }}.git
         git add processed_playlist.m3u
         git commit -m 'Update processed_playlist.m3u'
         git push origin main
