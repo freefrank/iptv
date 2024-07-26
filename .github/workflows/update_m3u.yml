@@ -26,6 +26,9 @@ jobs:
     - name: Run the script
       run: python script.py
 
+    - name: List files for debug
+      run: ls -al
+
     - name: Commit changes
       env:
         ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
