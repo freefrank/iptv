@@ -24,7 +24,9 @@ jobs:
       run: pip install requests
 
     - name: Run the script
-      run: python script.py
+      run: |
+        rm processed_itv_proxy.m3u
+        python script.py
 
     - name: List files for debug
       run: ls -al
