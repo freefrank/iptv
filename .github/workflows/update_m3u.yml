@@ -25,8 +25,8 @@ jobs:
 
     - name: Run the script
       run: |
-        sed -i '$c\#Generated at $(date "+%Y-%m-%d %H:%M:%S")' processed_itv_proxy.m3u
         python script.py
+        sed -i "\$c#Generated at $(date '+%Y-%m-%d %H:%M:%S')" processed_itv_proxy.m3u
 
     - name: List files for debug
       run: ls -al
