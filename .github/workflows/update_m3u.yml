@@ -25,7 +25,7 @@ jobs:
 
     - name: Run the script
       run: |
-        rm processed_itv_proxy.m3u
+        sed -i '$c\#Generated at $(date "+%Y-%m-%d %H:%M:%S")' processed_itv_proxy.m3u
         python script.py
 
     - name: List files for debug
